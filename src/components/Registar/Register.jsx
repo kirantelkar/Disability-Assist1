@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    console.log("Login details:", { email, password });
+    console.log("Registered details:", { name, email, password });
 
-    // Dummy validation
-    if (email === "test@example.com" && password === "password") {
-      alert("Login Successful!");
-      navigate("/dashboard"); // Redirect to dashboard after login
-    } else {
-      alert("Invalid Credentials");
-    }
+    alert("Registration Successful!");
+    navigate("/login"); // Redirect to login after registration
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
+        <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <label className="block mb-1">Full Name:</label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 border rounded-md"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label className="block mb-1">Email:</label>
             <input
@@ -46,18 +52,18 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
           >
-            Login
+            Register
           </button>
         </form>
         <p className="mt-4 text-center">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <button
             className="text-blue-600"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/login")}
           >
-            Register
+            Login
           </button>
         </p>
       </div>
@@ -65,4 +71,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
